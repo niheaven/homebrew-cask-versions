@@ -1,9 +1,8 @@
 cask 'anaconda2' do
-  version '5.1.0'
-  sha256 'b686e01aeadb33526d9c154a0ac6f691dfad135080df96fb44d3ae1e4b128521'
+  version '2018.12'
+  sha256 '5c590b1b3cdc2eedd52edce0caabbce6665d84084d31b913e789e8c46a94859d'
 
-  # repo.continuum.io/archive was verified as official when first introduced to the cask
-  url "https://repo.continuum.io/archive/Anaconda2-#{version}-MacOSX-x86_64.sh"
+  url "https://repo.anaconda.com/archive/Anaconda2-#{version}-MacOSX-x86_64.sh"
   name 'Continuum Analytics Anaconda2'
   homepage 'https://www.anaconda.com/what-is-anaconda/'
 
@@ -25,8 +24,15 @@ cask 'anaconda2' do
                       '/Applications/Anaconda-Navigator.app',
                     ]
 
+  zap trash: [
+               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.continuum.io.sfl*',
+               '~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.continuum.python.sfl*',
+               '~/.anaconda',
+               '~/.conda',
+               '~/.condarc',
+             ]
+
   caveats do
-    path_environment_variable "#{HOMEBREW_PREFIX}/anaconda2/bin"
     files_in_usr_local
   end
 end
